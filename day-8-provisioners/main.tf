@@ -4,8 +4,8 @@ provider "aws" {
 }
 
 
-resource "aws_key_pair" "example" {
-  key_name   = "provisioner"  # Replace with your desired key name
+resource "aws_key_pair" "example123" {
+  key_name   = "newnit"  # Replace with your desired key name
   public_key = file("~/.ssh/id_rsa.pub") 
 
 
@@ -74,7 +74,7 @@ resource "aws_security_group" "webSg" {
 resource "aws_instance" "server" {
   ami                    = "ami-0261755bbcb8c4a84"
   instance_type          = "t2.micro"
-  key_name      = aws_key_pair.example.key_name
+  key_name      = aws_key_pair.example123.key_name
   vpc_security_group_ids = [aws_security_group.webSg.id]
   subnet_id              = aws_subnet.sub1.id
 
@@ -88,19 +88,19 @@ resource "aws_instance" "server" {
 
   # local execution procee 
  provisioner "local-exec" {
-    command = "touch file500"
+    command = "touch file50"
    
  }
   # File provisioner to copy a file from local to the remote EC2 instance
   provisioner "file" {
-    source      = "file10"  # Replace with the path to your local file
-    destination = "/home/ubuntu/file10"  # Replace with the path on the remote instance
+    source      = "file30"  # Replace with the path to your local file
+    destination = "/home/ubuntu/file30"  # Replace with the path on the remote instance
   }
   # remote execution process 
   provisioner "remote-exec" {
     inline = [
 "touch file200",
-"echo hello from aws >> file200",
+"echo hello from aws >> file200"
 ]
  }
 
