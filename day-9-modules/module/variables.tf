@@ -1,3 +1,4 @@
+
 variable "ami" {
   description = "The AMI ID for the EC2 instance."
 }
